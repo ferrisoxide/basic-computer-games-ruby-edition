@@ -1,4 +1,4 @@
-# TODO: Put shebang here
+#! /usr/bin/env ruby
 puts "Acey Ducey Card Game"
 puts "Adapted from a BASIC game from Creative Computing - Morristown, New Jersey."
 puts "\n\n\n"
