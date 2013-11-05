@@ -12,17 +12,13 @@ puts "If you do not want to bet, input a 0."
 def play_game
 
   def card_to_s(index)
-    if index < 11
-      return index.to_s 
-    elsif index == 11
-      return "Jack"
-    elsif index == 12
-      return "Queen"
-    elsif index == 13
-      return "King"
-    elsif index == 14
-      return "Ace"      
-    end  
+    case index
+      when 11 then "Jack"
+      when 12 then "Queen"
+      when 13 then "King"
+      when 14 then "Ace"
+      else index.to_s
+    end
   end
   
   money = 100
