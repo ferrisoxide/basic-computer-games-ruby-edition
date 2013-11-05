@@ -50,7 +50,7 @@ def play_game
       elsif bet > money
         puts "Sorry, my friend but you have bet to much."
         puts "You have only #{money} dollars to bet."
-      elsif
+      else
         valid_bet = true
       end
     end
