@@ -48,7 +48,7 @@ def play_game
         puts "Chicken!!"
         valid_bet = true
       elsif bet > money
-        puts "Sorry, my friend but you have bet to much."
+        puts "Sorry, my friend but you have bet too much."
         puts "You have only #{money} dollars to bet."
       else
         valid_bet = true
