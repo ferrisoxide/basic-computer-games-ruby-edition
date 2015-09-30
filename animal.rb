@@ -20,8 +20,8 @@ end
 
 class Game
 
-  def root_question
-    @root_question ||= Question.new(
+  def starting_position
+    @starting_position ||= Question.new(
       text: "Does it swim?",
       yes_path: Animal.new(name: 'fish'),
       no_path:  Animal.new(name: 'bird')
@@ -29,47 +29,49 @@ class Game
   end
 
   def play
-    display_welcome_message
+    puts "Animal"
+    puts "Adapted from a BASIC game from Creative Computing - Morristown, New Jersey."
+    puts "\n\n"
+    puts "Play 'Guess the Animal'"
+    puts "Think of an animal and the computer will try and guess it."
+
     prompt_to_start
 
-    current_question = root_question
-    previous_question = nil
+    current_position = starting_position
+    previous_position = nil
     previous_path = ''
 
     while true
-      answer = ask_question(current_question)
+      answer = ask_question(current_position)
 
-      if current_question.is_a?(Question)
-        previous_question = current_question
+      if current_position.is_a?(Question)
+        previous_position = current_position
         previous_path = answer
-        # Set next question
-        current_question = case answer
-        when 'Y' then current_question.yes_path
-        when 'N' then current_question.no_path
+
+        current_position = case answer
+        when 'Y' then current_position.yes_path
+        when 'N' then current_position.no_path
         end
         next
       end
 
-      if current_question.is_a?(Animal)
+      if current_position.is_a?(Animal)
         if answer == 'Y'
           puts "Why not try another animal?"
         else
-          puts "The animal you were thinking of was a?"
-          new_animal_name = get_answer
-          last_animal_name = current_question.name
-          puts "Please type a question that would distinguish a #{last_animal_name} from a #{new_animal_name}"
-          new_question_text = get_answer
-          puts "For a #{new_animal_name} the answer would be?"
-          yes_or_no = get_yn_answer
+          new_animal_name = get_input "The animal you were thinking of was a?"
+          last_animal_name = current_position.name
+          new_question_text = get_input "Please type a question that would distinguish a #{last_animal_name} from a #{new_animal_name}"
+          yes_or_no = get_yn_answer "For a #{new_animal_name} the answer would be?"
 
           new_animal = Animal.new(name: new_animal_name)
 
           case yes_or_no
           when 'Y' then
             new_yes_path = new_animal
-            new_no_path  = current_question
+            new_no_path  = current_position
           when 'N' then
-            new_yes_path = current_question
+            new_yes_path = current_position
             new_no_path  = new_animal
           end
 
@@ -80,13 +82,13 @@ class Game
           )
 
           case previous_path
-          when 'Y' then previous_question.yes_path = new_question
-          when 'N' then previous_question.no_path = new_question
+          when 'Y' then previous_position.yes_path = new_question
+          when 'N' then previous_position.no_path = new_question
           end
         end
 
-        current_question = root_question
-        previous_question = nil
+        current_position = starting_position
+        previous_position = nil
         previous_path = ''
         prompt_to_start
       end
@@ -95,62 +97,61 @@ class Game
 
   private
 
-  def get_answer
-    answer = ''
-    while answer == ''
-      answer = gets.chomp
+  def get_input(prompt)
+    is_valid = false
+
+    while !is_valid
+      puts prompt
+      input = gets.chomp
+      is_valid = !input.empty?
+      is_valid = is_valid && yield(input) if block_given?
     end
-    answer
+
+    input
   end
 
-  def get_yn_answer
-    answer = ''
-    while answer != 'Y' && answer != 'N'
-      answer = get_answer.upcase
-    end
-    answer
+  def get_yn_answer(prompt)
+    get_input(prompt) do |input|
+      input.upcase == 'Y' || input.upcase == 'N'
+    end.upcase
   end
 
   def ask_question(node)
-    if node.is_a?(Animal)
-      puts "Is it a #{node.name}"
+    prompt = if node.is_a?(Animal)
+      "Is it a #{node.name}"
     else
-      puts node.text
+      node.text
     end
-    get_yn_answer
-  end
-
-  def display_welcome_message
-    puts "Animal"
-    puts "Adapted from a BASIC game from Creative Computing - Morristown, New Jersey."
-    puts "\n\n"
-    puts "Play 'Guess the Animal'"
-    puts "Think of an animal and the computer will try and guess it."
+    get_yn_answer(prompt)
   end
 
   def prompt_to_start
-    while true
-      puts "Are you thinking of an animal?"
-      answer = gets.chomp.upcase
-      list_animals if answer == 'LIST'
-      return if answer == 'Y'
+    get_input "Are you thinking of an animal?" do |input|
+      case input.upcase
+      when 'Y' then true
+      when 'LIST' then
+        list_animals
+        false
+      else
+        false
+      end
     end
   end
 
   def list_animals
     puts 'Animals I know'
-    animals = collect_animals(root_question, [])
+    animals = collect_animals(starting_position, [])
     animals.each do |animal|
       puts animal.name
     end
   end
 
-  def collect_animals(node, animals)
-    if node.is_a?(Animal)
-      animals << node
+  def collect_animals(position, animals)
+    if position.is_a?(Animal)
+      animals << position
     else
-      animals = collect_animals(node.yes_path, animals)
-      animals = collect_animals(node.no_path, animals)
+      animals = collect_animals(position.yes_path, animals)
+      animals = collect_animals(position.no_path, animals)
     end
     animals
   end
