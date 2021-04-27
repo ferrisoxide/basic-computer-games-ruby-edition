@@ -1,5 +1,10 @@
-basic-computer-games-ruby-edition
-=================================
+# BASIC COMPUTER GAMES - RUBY EDITION
+
+
+
+https://en.wikipedia.org/wiki/BASIC_Computer_Games
+
+![Basic Computer Games - Ruby Edition](/images/basic_computer_games.png)
 
 BASIC Computer Games from Creative Computing, ported to Ruby.
 
