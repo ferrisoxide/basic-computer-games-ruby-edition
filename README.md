@@ -26,7 +26,7 @@ NB Jeff Atwood (Coding Horror) has a similar project in the works, though his [b
 
 ## The Games
 
-test link: [test](../blob/master/acey-ducey.rb)
+test link: [test](../master/acey-ducey.rb)
 
 | Title  | Description | Source | Notes |
 | --- | --- | --- | --- |
