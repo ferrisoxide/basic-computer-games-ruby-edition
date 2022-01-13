@@ -26,11 +26,9 @@ NB Jeff Atwood (Coding Horror) has a similar project in the works, though his [b
 
 ## The Games
 
-test link: [test](../master/acey-ducey.rb)
-
 | Title  | Description | Source | Notes |
 | --- | --- | --- | --- |
-| Acey Ducey | Play acey-ducey with the computer | aceyducey.rb | aceyducey.md |
+| Acey Ducey | Play acey-ducey with the computer | [aceyducey.rb](../master/acey-ducey.rb)| [aceyducey.md](../master/acey-ducey.md) |
 | Amazing | Computer constructs a maze | amazing.rb | amazing.md |
 | Animal | Computer guesses animals and learns new ones from you | animal.rb | animal.md |
 | Awari | Ancient game of rotating beans in pits | awari.rb | awari.md |
