@@ -12,8 +12,10 @@
 
 Back in the day, before the internet and when [3.5K of RAM](https://en.wikipedia.org/wiki/Commodore_VIC-20) was a big deal, budding young coders would learn their chops by typing out programs written in the BASIC programing language from books and magazines.
 
-One such book was Creative Computing's [BASIC Computer Games](https://en.wikipedia.org/wiki/BASIC_Computer_Games), a compendium of simple BASIC games edited by [Dave Ahl](https://en.wikipedia.org/wiki/David_H._Ahl) and illustrated by George Beker (his ["Beker Bots"](http://www.bekerbots.com/))
+One such book was Creative Computing's [BASIC Computer Games](https://en.wikipedia.org/wiki/BASIC_Computer_Games), a compendium of simple BASIC games edited by [Dave Ahl](https://en.wikipedia.org/wiki/David_H._Ahl) and illustrated by George Beker (his ["Beker Bots"](http://www.bekerbots.com/)).
 
+
+The games contained
 They could also teach some [bad programming habits](https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf)
 
 The goal of the 'Basic Computer Games - Ruby Edition' is to not only port the original BASIC games to Ruby, but to also provide some of that missing context.
@@ -25,6 +27,8 @@ NB Jeff Atwood (Coding Horror) has a similar project in the works, though his [b
 ## Project Structure
 
 ## The Games
+
+The names and descriptions of the game taken from [http://www.vintage-basic.net/games.html](http://www.vintage-basic.net/games.html). Follow the link to find listings for the original BASIC programs.
 
 | Title  | Description | Source | Notes |
 | --- | --- | --- | --- |
